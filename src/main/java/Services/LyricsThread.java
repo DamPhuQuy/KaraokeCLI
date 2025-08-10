@@ -1,6 +1,6 @@
 package Services;
 
-import utilities.Animation;
+import Utilities.Animation;
 
 import java.util.List;
 
@@ -51,7 +51,7 @@ public class LyricsThread implements Runnable {
                     throw new RuntimeException(e);
                 }
             }
-            Animation.printTypewriting(lyricLine.getText());
+            Animation.printTypeWriting(lyricLine.getText());
         }
     }
 }

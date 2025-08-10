@@ -4,28 +4,24 @@ import java.io.*;
 
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
-import utilities.DirectoryHelper;
+import Utilities.DirectoryHelper;
 
 
 public class AudioThread implements Runnable {
-    private final String fileName;
+    private String fileName;
 
-    public AudioThread(String fileName) {
-        this.fileName = fileName;
+    public AudioThread(String fileName, int choice) {
+        if (choice == 1) {
+            this.fileName = DirectoryHelper.getMusicDir(fileName);
+        } else if (choice == 2) {
+            this.fileName = DirectoryHelper.getInstrumentDir(fileName);
+        }
     }
 
     @Override
     public void run() {
-        String path = DirectoryHelper.getMusicDir(fileName);
-
-        // Check that file exists or not
-        File file = new File(path);
-        if (!file.exists()) {
-            throw new IllegalArgumentException("File not found: " + file.getAbsolutePath());
-        }
-
         // Create stream to read the audio file
-        try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file))) {
+        try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(fileName))) {
             Player player = new Player(bis);
             player.play();
         } catch (JavaLayerException | IOException e) {
