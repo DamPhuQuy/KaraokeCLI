@@ -2,16 +2,21 @@ import Services.AudioThread;
 import Services.LyricsThread;
 import Services.Menu;
 import Utilities.LrcParser;
+import Utilities.readDir;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
         Scanner sc = new Scanner(System.in);
+
+        Set<String> store = readDir.listFilesUsingFilesList("data/music");
+
         do {
+            for (String file : store) {
+                System.out.println(file); 
+            }
             System.out.print("Enter your song: ");
             String music = sc.nextLine();
             if (music.isEmpty()) {
